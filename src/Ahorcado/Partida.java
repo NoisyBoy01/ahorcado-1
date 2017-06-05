@@ -32,6 +32,7 @@ public class Partida {
 	 * @return letra 
 	 */
 	public char pedirLetra() {
+		
 	}
 
 	/**
@@ -45,5 +46,6 @@ public class Partida {
 	 * @return fin 
 	 */
 	public boolean comprobarFinal() {
+		
 	}
 };

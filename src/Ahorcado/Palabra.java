@@ -26,10 +26,10 @@ public class Palabra {
 	/**
 	 * 
 	 */
-	public String elegirPalabra() {
+	public void elegirPalabra() {
 		String[] palabras = { "Jirafa", "Perro", "Gato", "Gallo", "Elefante", "Rata", "Tortuga" };
 		String elegida = palabras[(int) (Math.round(Math.random() * (palabras.length - 1)))];
-		return elegida;
+		palabraOculta= elegida;
 	}
 
 	/**
