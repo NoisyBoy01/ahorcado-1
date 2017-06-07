@@ -4,6 +4,10 @@
 
 package Ahorcado;
 
+import java.util.Scanner;
+
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
+
 import Ahorcado.Horca;
 import Ahorcado.Palabra;
 
@@ -15,37 +19,117 @@ public class Partida {
 	/**
 	 * 
 	 */
-	public Horca horca;
+	public static Horca horca;
 	/**
 	 * 
 	 */
-	public Palabra palabra;
+	public static Palabra palabra;
 
 	/**
-	 * 
+	 * Muestra el estado de la horca  y los resultados de palabra
 	 */
-	public void mostrarProgreso() {
-	}
-
-	/**
-	 * 
-	 * @return letra 
-	 */
-	public char pedirLetra() {
+	public static void mostrarProgreso() {
+		
+		horca.dibujar();
+		palabra.mostrarResultados();
+		
 		
 	}
 
 	/**
-	 * 
+	 * SOlicita una letra  al usuario
+	 * @return letra 
 	 */
-	public void resolver() {
+	public static char pedirLetra() {
+		
+		Scanner entrada = new Scanner(System.in);
+		System.out.print("Introduce una letra ");
+		char letra = entrada.nextLine().charAt(0);
+		return  letra;
+		
+		
+		
 	}
 
 	/**
+	 * Pide la respuesta 
+	 * @return palabra true si era la que buscabamos o false en caso contrario 
 	 * 
-	 * @return fin 
 	 */
-	public boolean comprobarFinal() {
+	public static boolean resolver() {
+		Scanner entrada = new Scanner(System.in);
+		System.out.print("Introduce una respuesta ");
+		return palabra.comprobarPalabra(entrada.nextLine());
+			
+	
+		
+		
+	}
+
+	/**
+	 * Comprueba tanto si hemos agotado los fallos como si hemos acertado todas las letras
+	 * @return fin true si hemos ganado o perdido false si todavia jugamos  
+	 */
+	public static boolean comprobarFinal() {
+		
+		return (horca.comprobarSiPerdido() || palabra.comprobarSiGanado());
+		
+		
+		
+		
+		
+		
+	}
+	
+	public static int  elegirDelMenu(){
+		Scanner entrada = new Scanner(System.in);
+		System.out.println("Elige una opcion :" );
+		System.out.println("1. Letra" );
+		System.out.println("2. Resolver");
+		System.out.println("3. Abandonar"); 
+		return entrada.nextInt();
+	}
+	
+	public static void main(String[] args) {
+		
+		horca = new Horca();
+		 palabra = new Palabra();
+		boolean noHaResueltoMal = true;
+		palabra.elegirPalabra();
+		while(!comprobarFinal() &&  noHaResueltoMal ){
+			
+			switch (elegirDelMenu()){
+			
+			case 1: 
+				palabra.comprobarLetra(pedirLetra());
+				mostrarProgreso();
+				break;
+				
+			case 2:
+				if(resolver()) System.out.println("Has ganado ");
+				
+				else {
+					System.out.println("lo siento has perdido");
+					noHaResueltoMal = false;
+				}
+				
+				
+				break;
+			case 3:
+				System.exit(0);
+			default :
+				break;
+				
+			
+			
+			}
+		
+		
+			
+		}
+		
+		
+		
 		
 	}
 };
