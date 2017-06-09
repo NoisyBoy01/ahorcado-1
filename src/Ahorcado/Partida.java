@@ -83,6 +83,7 @@ public class Partida {
 	
 	public static int  elegirDelMenu(){
 		Scanner entrada = new Scanner(System.in);
+		System.out.println("");
 		System.out.println("Elige una opcion :" );
 		System.out.println("1. Letra" );
 		System.out.println("2. Resolver");
@@ -101,7 +102,7 @@ public class Partida {
 			switch (elegirDelMenu()){
 			
 			case 1: 
-				palabra.comprobarLetra(pedirLetra());
+				if(!palabra.comprobarLetra(pedirLetra())) horca.incrementarFallo();
 				mostrarProgreso();
 				break;
 				
